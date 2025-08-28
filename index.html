@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bero - Links</title>
+    <!-- SEO -->
+    <meta name="description" content="Se você gosta de programação, criação de apps, SaaS, inteligência artificial, jogos, animação, arte e comunidades do discord, você tá no lugar certo! Bem vindo a BeroLand, o seu centralizados de todos os links do Bero.">
+    <meta name="keywords" content="como programar, como aprender a programar, como virar um programador, desenvolvedor de software, developer, como conseguir um emprego pra gringa, como virar dev internacional, como conseguir dinheiro com programação, bero, bero o dev, meu nome e bero">
+    <link rel="icon" href="./public/banner.png" type="image/png">
+    <link rel="shortcut icon" href="./public/banner.png" type="image/png">
+    <link rel="apple-touch-icon" href="./public/banner.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BeroLand - Links do Bero">
+    <meta property="og:description" content="Se você gosta de programação, criação de apps, SaaS, inteligência artificial, jogos, animação, arte e comunidades do discord, você tá no lugar certo! Bem vindo a BeroLand, o seu centralizados de todos os links do Bero.">
+    <meta property="og:image" content="./public/banner.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BeroLand - Links do Bero">
+    <meta name="twitter:description" content="Se você gosta de programação, criação de apps, SaaS, inteligência artificial, jogos, animação, arte e comunidades do discord, você tá no lugar certo! Bem vindo a BeroLand, o seu centralizados de todos os links do Bero.">
+    <meta name="twitter:image" content="./public/banner.png">
+    <!-- Preload local DINRoundPro font files -->
+    <link rel="preload" href="/public/fonts/dinroundpro_light.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="/public/fonts/dinroundpro.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="/public/fonts/dinroundpro_medi.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="/public/fonts/dinroundpro_bold.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="/public/fonts/dinroundpro_black.otf" as="font" type="font/otf" crossorigin>
+    <style>
+        html {
+            font-family: 'DINRoundPro', system-ui, -apple-system, sans-serif;
+        }
+
+        /* Hide native cursor, we'll draw our own */
+        html, body, a, a *, button, button *, .link-card, .link-card * {
+            cursor: none !important;
+        }
+
+        /* Fake cursor element */
+        #custom-cursor {
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 64px; /* visual size */
+            height: 64px; /* visual size */
+            pointer-events: none;
+            background: url('./public/cursor.png') no-repeat center / contain;
+            transform: translate(-8px, -8px);
+            will-change: transform, background-image;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        /* Swap to pointer when hovering clickable */
+        .is-pointer #custom-cursor {
+            background-image: url('./public/pointer.png');
+        }
+
+        @font-face {
+            font-family: 'DINRoundPro';
+            src: url('/public/fonts/dinroundpro_light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'DINRoundPro';
+            src: url('/public/fonts/dinroundpro.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'DINRoundPro';
+            src: url('/public/fonts/dinroundpro_medi.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'DINRoundPro';
+            src: url('/public/fonts/dinroundpro_bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'DINRoundPro';
+            src: url('/public/fonts/dinroundpro_black.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+            font-display: swap;
+        }
+        /* Using Roboto Mono from Google Fonts */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        body {
+            font-family: inherit;
+            min-height: 100vh;
+            background-color: #191919;
+            position: relative;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-kerning: normal;
+            font-variant-ligatures: common-ligatures contextual;
+            font-feature-settings: "kern" 1, "liga" 1, "clig" 1, "calt" 1;
+            font-synthesis: none;
+        }
+
+        input, button, textarea, select {
+            font: inherit;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 580px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar-section {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .avatar-container {
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 5px 0 #37464F;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .name-title {
+            font-size: 2.25rem;
+            font-weight: 500;
+            color: white;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.01em;
+        }
+
+        .wave-emoji {
+            display: inline-block;
+            margin-left: 0.5rem;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-20%); }
+            50% { transform: translateY(20%); }
+        }
+
+        .social-links {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .link-card {
+            width: 100%;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 150ms ease-out;
+            border: 2px solid #37464F;
+            position: relative;
+            background: transparent;
+            box-shadow: 0 3px 0 #37464F;
+            transform: translateY(0);
+        }
+
+        .link-card:hover {
+          box-shadow: 0 7px 0 #37464F;
+          transform: translateY(-4px);
+        }
+
+        .link-card:active {
+            transform: scale(0.98) translateY(3px);
+            box-shadow: none;
+        }
+
+        .link-card.pressed {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+
+        .icon-wrapper {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            font-size: 1.875rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .link-content {
+            text-align: left;
+            flex: 1;
+        }
+
+        .link-title {
+            font-weight: 500;
+            color: #fff;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.005em;
+        }
+
+        .link-description {
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .arrow-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            color: #4B4B4B;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="custom-cursor"></div>
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Avatar/Banner Section -->
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <img src="./public/fly.gif" alt="Bero Avatar" class="avatar-img">
+                </div>
+            </div>
+
+            <!-- Name and Wave Emoji -->
+            <div class="name-section">
+                <h1 class="name-title">
+                    Bem vindo a BeroLand!
+                    <span class="wave-emoji">👋</span>
+                </h1>
+            </div>
+
+            <!-- Social Links -->
+            <div class="social-links" id="socialLinks">
+                <!-- Links will be generated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Made with ☕ by Bero</p>
+        </div>
+    </div>
+
+    <script>
+        // Custom cursor logic
+        (function() {
+            const cursorEl = document.getElementById('custom-cursor');
+            const pointerSelectors = 'a, button, .link-card';
+
+            function onMouseMove(ev) {
+                const x = ev.clientX;
+                const y = ev.clientY;
+                cursorEl.style.transform = `translate(${x - 8}px, ${y - 8}px)`;
+                const isPointer = ev.target && ev.target.closest(pointerSelectors);
+                document.documentElement.classList.toggle('is-pointer', Boolean(isPointer));
+            }
+
+            document.addEventListener('mousemove', onMouseMove, { passive: true });
+        })();
+
+        const socialLinks = [
+            {
+                id: 6,
+                title: 'Discord • mansão dev',
+                description: 'Comunidade de programadores, artistas e gaymers',
+                url: 'https://discord.com/servers/mansao-dev-1132161173484224642',
+                icon: '💬'
+            },
+            {
+                id: 3,
+                title: 'Twitter',
+                description: 'Perfil do X com atualizações diárias sobre vídeos e projetos pessoais',
+                url: 'https://x.com/meunomeebero',
+                icon: '🐦'
+            },
+            {
+                id: 4,
+                title: 'Instagram',
+                description: 'Perfil que uso com menos frequência, para stories, animações e posts',
+                url: 'https://www.instagram.com/meunomeebero',
+                icon: '📷'
+            },
+             {
+                id: 5,
+                title: 'YouTube • bero o dev',
+                description: 'Canal de programação e indie hacking',
+                url: 'https://www.youtube.com/@meunomeebero',
+                icon: '🎥'
+            },
+            {
+                id: 5,
+                title: 'YouTube • bero',
+                description: 'Canal de animações e outros vídeos peculiares',
+                url: 'https://www.youtube.com/@meunomeebero',
+                icon: '🎥'
+            },
+            {
+                id: 1,
+                title: 'GitHub',
+                description: 'Perfil dedicado a projetos publico do Bero',
+                url: 'https://github.com/meunomeebero',
+                icon: '🐙'
+            },
+       
+        ];
+
+        const socialLinksContainer = document.getElementById('socialLinks');
+
+        socialLinks.forEach(link => {
+            const button = document.createElement('button');
+            button.className = 'link-card';
+            button.onclick = function() {
+                // Add pressed effect
+                button.classList.add('pressed');
+
+                // Open link after animation
+                setTimeout(() => {
+                    window.open(link.url, '_blank');
+                    button.classList.remove('pressed');
+                }, 150);
+            };
+
+            button.innerHTML = `
+                <div class="icon-wrapper">
+                    ${link.icon}
+                </div>
+                <div class="link-content">
+                    <h3 class="link-title">${link.title}</h3>
+                    <p class="link-description">${link.description}</p>
+                </div>
+                <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            `;
+
+            socialLinksContainer.appendChild(button);
+        });
+    </script>
+</body>
+</html>
