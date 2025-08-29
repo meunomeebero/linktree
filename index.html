@@ -362,38 +362,45 @@
                 title: 'Twitter',
                 description: 'Perfil que uso para atualizações diárias sobre vídeos e projetos pessoais',
                 url: 'https://x.com/meunomeebero',
-                icon: '🐦'
+                icon: '🐦',
+                event: 'x_click'
             },
             {
                 title: 'Instagram',
                 description: 'Perfil que uso com menos frequência, para stories, animações e posts',
                 url: 'https://www.instagram.com/meunomeebero',
-                icon: '📷'
+                icon: '📷',
+                event: 'instagram_click'
             },
               {
                 title: 'YouTube => bero',
                 description: 'Canal que uso para animações e projetos divertidos com programação',
                 url: 'https://www.youtube.com/@meunomeebero',
-                icon: '🎥'
+                icon: '🎥',
+                event: 'youtube_bero_click'
+
             },
              {
                 title: 'YouTube => bero o dev',
                 description: 'Canal que eu uso para vídeos focados em dicas de carreira, programação e indie hacking',
                 url: 'https://www.youtube.com/@meunomeebero',
-                icon: '🎥'
+                icon: '🎥',
+                event: 'youtube_bero_o_dev_click'
             },
             {
                 title: 'GitHub',
                 description: 'Perfil dedicado a projetos publicos do Bero',
                 url: 'https://github.com/meunomeebero',
-                icon: '🐙'
+                icon: '🐙',
+                event: 'github_click'
             },
             {
                 title: '+18',
                 description: 'Conteúdo secreto do Bero',
                 url: '#',
                 icon: '🔞',
-                isSecret: true
+                isSecret: true,
+                event: 'secret_click'
             }
        
         ];
@@ -404,12 +411,14 @@
                 description: 'Laboratório de devs, com foco em hackear o mercado',
                 url: 'https://berolab.app',
                 icon: '⚗️',
+                event: 'berolab_click'
             },
             {
                 title: 'Discord • mansão dev',
                 description: 'Minha comunidade de programadores, artistas e gaymers',
                 url: 'https://discord.com/servers/mansao-dev-1132161173484224642',
-                icon: '💬'
+                icon: '💬',
+                event: 'discord_click'
             },
         ]
 
@@ -437,6 +446,8 @@
 
                     // Add pressed effect
                     button.classList.add('pressed');
+
+                    window?.datafast(link.event);
 
                     // Open link after animation
                     setTimeout(() => {
