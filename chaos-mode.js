@@ -357,6 +357,11 @@
     }
 
     function initChaos() {
+        const audio = new Audio('/public/undertale.mp3');
+        audio.loop = true
+        audio.play();
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
         document.body.classList.add('chaos-mode');
 
         createMatrixRain();
