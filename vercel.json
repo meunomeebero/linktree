@@ -1,6 +1,7 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
+  "buildCommand": "echo 'No build needed'",
+  "outputDirectory": ".",
+  "framework": null,
   "rewrites": [
     {
       "source": "/(.*)",
