@@ -362,6 +362,14 @@
                 url: 'https://github.com/meunomeebero',
                 icon: '🐙'
             },
+            {
+                id: 18,
+                title: '+18',
+                description: 'Conteúdo secreto do Bero',
+                url: '#',
+                icon: '🔞',
+                isSecret: true
+            }
        
         ];
 
@@ -371,6 +379,20 @@
             const button = document.createElement('button');
             button.className = 'link-card';
             button.onclick = function() {
+                // Check if it's the secret card
+                if (link.isSecret) {
+                    // Add pressed effect
+                    button.classList.add('pressed');
+                    setTimeout(() => {
+                        button.classList.remove('pressed');
+                        // Load the chaos script
+                        const script = document.createElement('script');
+                        script.src = './chaos-mode.js';
+                        document.body.appendChild(script);
+                    }, 150);
+                    return;
+                }
+
                 // Add pressed effect
                 button.classList.add('pressed');
 
