@@ -408,13 +408,13 @@
         const mainLinks = [
             {
                 title: 'BeroLab',
-                description: 'Laboratório de devs, com foco em hackear o mercado',
+                description: 'Laboratório de devs com foco em hackear o mercado',
                 url: 'https://berolab.app',
                 icon: '⚗️',
                 event: 'berolab_click'
             },
             {
-                title: 'Discord • mansão dev',
+                title: 'Discord => mansão dev',
                 description: 'Minha comunidade de programadores, artistas e gaymers',
                 url: 'https://discord.com/servers/mansao-dev-1132161173484224642',
                 icon: '💬',
@@ -430,6 +430,8 @@
                 const button = document.createElement('button');
                 button.className = 'link-card';
                 button.onclick = function() {
+                    window?.datafast(link.event);
+
                     // Check if it's the secret card
                     if (link.isSecret) {
                         // Add pressed effect
@@ -446,8 +448,6 @@
 
                     // Add pressed effect
                     button.classList.add('pressed');
-
-                    window?.datafast(link.event);
 
                     // Open link after animation
                     setTimeout(() => {
