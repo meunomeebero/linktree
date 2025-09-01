@@ -45,7 +45,6 @@
             cursor: none !important;
         }
 
-        /* Fake cursor element */
         #custom-cursor {
             position: fixed;
             z-index: 9999;
@@ -332,14 +331,12 @@
     <div id="custom-cursor"></div>
     <div class="container">
         <div class="content-wrapper">
-            <!-- Avatar/Banner Section -->
             <div class="avatar-section">
                 <div class="avatar-container">
                     <img src="public/fly.gif" alt="Bero Avatar" class="avatar-img">
                 </div>
             </div>
 
-            <!-- Name and Wave Emoji -->
             <div class="name-section">
                 <h1 class="name-title">
                     Bem vindo a BeroLand!
@@ -355,7 +352,6 @@
                 </h2>
             </div>
 
-            <!-- Main Links -->
             <div class="social-links" id="mainLinks"></div>
 
             <div class="divider"></div>
@@ -366,11 +362,9 @@
                 </h2>
             </div>
             
-            <!-- Social Links -->
             <div class="social-links" id="socialLinks"></div>
         </div>
 
-        <!-- Footer -->
         <div class="footer">
             <p>Made with ☕ by <a href="https://github.com/meunomeebero/linktree" target="_blank" rel="noopener noreferrer">Bero</a></p>
         </div>
@@ -481,13 +475,10 @@
                 button.onclick = function() {
                     window?.datafast(link.event);
 
-                    // Check if it's the secret card
                     if (link.isSecret) {
-                        // Add pressed effect
                         wrapper.classList.add('pressed');
                         setTimeout(() => {
                             wrapper.classList.remove('pressed');
-                            // Load the chaos script
                             const script = document.createElement('script');
                             script.src = './chaos-mode.js';
                             document.body.appendChild(script);
@@ -495,10 +486,8 @@
                         return;
                     }
 
-                    // Add pressed effect
                     wrapper.classList.add('pressed');
 
-                    // Open link after animation
                     setTimeout(() => {
                         window.open(link.url, '_blank');
                         wrapper.classList.remove('pressed');
