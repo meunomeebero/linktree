@@ -472,8 +472,17 @@
                 
                 const button = document.createElement('button');
                 button.className = 'link-card';
-                button.onclick = function() {
-                    window?.datafast(link.event);
+                button.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    if (window.datafast) {
+                        try {
+                            Promise.resolve().then(() => window.datafast(link.event));
+                        } catch (error) {
+                            console.warn('Erro no tracking:', error);
+                        }
+                    }
 
                     if (link.isSecret) {
                         wrapper.classList.add('pressed');
@@ -488,8 +497,13 @@
 
                     wrapper.classList.add('pressed');
 
+                    const newWindow = window.open(link.url, '_blank');
+                    
+                    if (!newWindow) {
+                        window.location.href = link.url;
+                    }
+                    
                     setTimeout(() => {
-                        window.open(link.url, '_blank');
                         wrapper.classList.remove('pressed');
                     }, 150);
                 };
