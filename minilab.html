@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniLab de Javascript - Bero</title>
+    <!-- SEO -->
+    <meta name="description" content="Aprenda Javascript do zero até a construção de um bot do WhatsApp integrado com IA em apenas 1:30h. De R$197 por apenas R$37!">
+    <meta name="keywords" content="javascript, programação, bot whatsapp, ia, curso javascript, node, npm, programação para iniciantes">
+    <link rel="icon" href="public/banner.png" type="image/png">
+    <link rel="shortcut icon" href="public/banner.png" type="image/png">
+    <link rel="apple-touch-icon" href="public/banner.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MiniLab de Javascript - Bero">
+    <meta property="og:description" content="Aprenda Javascript do zero até a construção de um bot do WhatsApp integrado com IA em apenas 1:30h. De R$197 por apenas R$37!">
+    <meta property="og:image" content="public/banner.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MiniLab de Javascript - Bero">
+    <meta name="twitter:description" content="Aprenda Javascript do zero até a construção de um bot do WhatsApp integrado com IA em apenas 1:30h. De R$197 por apenas R$37!">
+    <meta name="twitter:image" content="public/banner.png">
+
+    <!-- Preload local DINRoundPro font files -->
+    <link rel="preload" href="public/fonts/dinroundpro_light.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="public/fonts/dinroundpro.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="public/fonts/dinroundpro_medi.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="public/fonts/dinroundpro_bold.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="public/fonts/dinroundpro_black.otf" as="font" type="font/otf" crossorigin>
+
+    <!-- Pixel Meta -->
+    <script>
+      window.pixelId = "687439fcc9dae18db0378b69";
+      var a = document.createElement("script");
+      a.setAttribute("async", "");
+      a.setAttribute("defer", "");
+      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+      document.head.appendChild(a);
+    </script>
+
+    <!-- Script de UTM -->
+    <script
+      src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+      data-utmify-prevent-subids
+      async
+      defer
+    ></script>
+
+    <style>
+        html {
+            font-family: 'DINRoundPro', system-ui, -apple-system, sans-serif;
+        }
+
+        html, body, a, a *, button, button *, .link-card, .link-card * {
+            cursor: none !important;
+        }
+
+        #custom-cursor {
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 64px;
+            height: 64px;
+            pointer-events: none;
+            background: url('public/cursor.png') no-repeat center / contain;
+            transform: translate(-8px, -8px);
+            will-change: transform, background-image;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        .is-pointer #custom-cursor {
+            background-image: url('public/pointer.png');
+        }
+
+        @font-face {
+            font-family: 'DINRoundPro';
+            src: url('public/fonts/dinroundpro_light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'DINRoundPro';
+            src: url('public/fonts/dinroundpro.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'DINRoundPro';
+            src: url('public/fonts/dinroundpro_medi.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'DINRoundPro';
+            src: url('public/fonts/dinroundpro_bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'DINRoundPro';
+            src: url('public/fonts/dinroundpro_black.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        body {
+            font-family: inherit;
+            min-height: 100vh;
+            background-color: #191919;
+            position: relative;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-kerning: normal;
+            font-variant-ligatures: common-ligatures contextual;
+            font-feature-settings: "kern" 1, "liga" 1, "clig" 1, "calt" 1;
+            font-synthesis: none;
+        }
+
+        input, button, textarea, select {
+            font: inherit;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 580px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar-section {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .avatar-container {
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .avatar-container:after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #37464F;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name-section {
+            text-align: center;
+        }
+
+        .name-title {
+            font-size: 2.25rem;
+            font-weight: 500;
+            color: white;
+            letter-spacing: 0.01em;
+            margin-bottom: 1rem;
+        }
+
+        .video-container {
+            width: 100%;
+            margin: 2rem 0;
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .course-content {
+            width: 100%;
+            background: #141414;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .course-content h2 {
+            color: white;
+            font-size: 1.75rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .course-list {
+            list-style: none;
+            color: white;
+        }
+
+        .course-list li {
+            padding: 0.75rem 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .course-list li:last-child {
+            border-bottom: none;
+        }
+
+        .course-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .pricing-section {
+            width: 100%;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .price-wrapper {
+            margin-bottom: 2rem;
+        }
+
+        .old-price {
+            color: #999;
+            font-size: 1.5rem;
+            text-decoration: line-through;
+            margin-bottom: 0.5rem;
+        }
+
+        .new-price {
+            color: #4CAF50;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .cta-button {
+            width: 100%;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            transition: all 150ms ease-out;
+            position: relative;
+            transform: translateY(-4px);
+        }
+
+        .cta-wrapper {
+            width: 100%;
+            position: relative;
+        }
+
+        .cta-shadow {
+            position: absolute;
+            top: 3px;
+            left: 0;
+            right: 0;
+            height: calc(100% - 3px);
+            background: #2d7a3b;
+            border-radius: 1rem;
+            transition: 150ms ease-out;
+        }
+
+        .cta-wrapper:hover .cta-shadow {
+            top: 2px;
+        }
+
+        .cta-wrapper:hover .cta-button {
+            transform: translateY(-8px);
+        }
+
+        .cta-wrapper:active .cta-button {
+            transform: scale(0.98);
+        }
+
+        .cta-wrapper:active .cta-shadow {
+            transform: scale(0.98);
+        }
+
+        .divider {
+            background: #37464F;
+            height: 2px;
+            width: 100%;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .footer {
+            font-weight: 500;
+            text-align: center;
+            margin-top: 3rem;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="custom-cursor"></div>
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <img src="public/fly.gif" alt="Bero Avatar" class="avatar-img">
+                </div>
+            </div>
+
+            <div class="name-section">
+                <h1 class="name-title">
+                    Bem vindo ao MiniLab de Javascript
+                </h1>
+            </div>
+
+            <div class="video-container">
+                <iframe
+                    src="https://www.youtube.com/embed/vsfZlkO4fcQ?autoplay=1"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="course-content">
+                <h2>O que você vai aprender em 1:30h ⏰</h2>
+                <ul class="course-list">
+                    <li>O que é uma linguagem de programação</li>
+                    <li>O que é Algoritmo e Linguagem de máquina</li>
+                    <li>O que é sintaxe e Lógica de programação</li>
+                    <li>Fundamentos do Javascript</li>
+                    <li>Variáveis no Javascript</li>
+                    <li>Estrutura de dados no Javascript</li>
+                    <li>Classes no Javascript</li>
+                    <li>Funções no Javascript</li>
+                    <li>O que é o Node</li>
+                    <li>O que é o motor V8</li>
+                    <li>Javascript de browser vs Javascript no Node</li>
+                    <li>Node package manager</li>
+                    <li>Como iniciar um projeto com Node</li>
+                    <li>Como instalar bibliotecas externas</li>
+                    <li>Como usar bibliotecas internas</li>
+                    <li>Estruturando Bot</li>
+                    <li>Integrando com IA</li>
+                    <li>Gerando QR code para conectar whatsapp</li>
+                    <li>Finalizando o app</li>
+                    <li>Próximos passos</li>
+                </ul>
+            </div>
+
+            <div class="pricing-section">
+                <div class="price-wrapper">
+                    <div class="old-price">de R$197</div>
+                    <div class="new-price">por R$37</div>
+                </div>
+
+                <div class="cta-wrapper">
+                    <div class="cta-shadow"></div>
+                    <button class="cta-button" id="ctaButton">
+                        Garantir promoção
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Made with ☕ by <a href="https://github.com/meunomeebero/linktree" target="_blank" rel="noopener noreferrer">Bero</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Custom cursor logic
+        (function() {
+            const cursorEl = document.getElementById('custom-cursor');
+            const pointerSelectors = 'a, button, .cta-button';
+
+            function onMouseMove(ev) {
+                const x = ev.clientX;
+                const y = ev.clientY;
+                cursorEl.style.transform = `translate(${x - 8}px, ${y - 8}px)`;
+                const isPointer = ev.target && ev.target.closest(pointerSelectors);
+                document.documentElement.classList.toggle('is-pointer', Boolean(isPointer));
+            }
+
+            const audio = new Audio('./public/pru.mp3');
+
+            function onMouseClick(ev) {
+                audio.play();
+            }
+
+            document.addEventListener('mousemove', onMouseMove, { passive: true });
+            document.addEventListener('click', onMouseClick, { passive: true });
+        })();
+
+        // CTA button logic
+        const ctaButton = document.getElementById('ctaButton');
+        ctaButton.addEventListener('click', function() {
+            // Track click event
+            if (window.datafast) {
+                try {
+                    Promise.resolve().then(() => window.datafast('minilab_cta_click'));
+                } catch (error) {
+                    console.warn('Erro no tracking:', error);
+                }
+            }
+
+            // Redirecionar para o link de compra do Hotmart
+            window.open('https://pay.hotmart.com/G100981299H?off=q70kb6yi&bid=1759780348438', '_blank');
+        });
+    </script>
+</body>
+</html>
