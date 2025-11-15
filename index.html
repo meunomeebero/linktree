@@ -111,6 +111,16 @@
             font-family: inherit;
         }
 
+        ::selection {
+            background: transparent;
+            color: inherit;
+        }
+
+        ::-moz-selection {
+            background: transparent;
+            color: inherit;
+        }
+
         body {
             font-family: inherit;
             min-height: 100vh;
@@ -180,11 +190,93 @@
         }
 
         .name-title {
-            font-size: 2.25rem;
-            font-weight: 500;
+            font-size: 2.75rem;
+            font-weight: 700;
             color: white;
             letter-spacing: 0.01em;
-            margin-bottom: 1rem;;
+            margin-bottom: 1rem;
+        }
+
+        .description-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+            width: 540px;
+            max-width: calc(100vw - 2rem);
+        }
+
+        .secret-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #50fa7b;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .description-wrapper.dragged .secret-message {
+            opacity: 1;
+        }
+
+        .description-shadow {
+            position: absolute;
+            top: 3px;
+            left: 0;
+            right: 0;
+            height: calc(100% - 3px);
+            background: #37464F;
+            border-radius: 1rem;
+            transform: translateY(-4px);
+            transition: opacity 150ms ease-out;
+            z-index: 1;
+        }
+
+        .description-wrapper.dragging .description-shadow {
+            opacity: 0.5;
+        }
+
+        .description {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #fff;
+            text-align: center;
+            line-height: 1.7;
+            width: 100%;
+            background: #191919;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 2px solid #37464F;
+            position: relative;
+            z-index: 2;
+            cursor: grab;
+            user-select: none;
+            transform: translateY(-4px);
+            transition: opacity 0.3s ease;
+        }
+
+        .description:active {
+            cursor: grabbing;
+        }
+
+        .description.dragging {
+            cursor: grabbing;
+            opacity: 0.9;
+        }
+
+        .email-link {
+            color: #37464F;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+
+        .email-link:hover {
+            opacity: 0.8;
         }
 
         .wave-emoji {
@@ -297,6 +389,39 @@
             color: #4B4B4B;
         }
 
+        .price-badge {
+            flex-shrink: 0;
+            position: relative;
+            padding: 0.625rem 1rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            border-radius: 0.75rem;
+            background: #191919;
+            color: #fff;
+            border: 2px solid #37464F;
+            box-shadow: 0 4px 0 #37464F;
+            transform: translateY(-3px);
+            transition: all 150ms ease;
+        }
+
+        .link-wrapper:hover .price-badge {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 0 #37464F;
+        }
+
+        .link-wrapper:active .price-badge {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 0 #37464F;
+        }
+
+        .price-badge.free::before {
+            content: '★';
+            margin-right: 0.25rem;
+            font-size: 1rem;
+        }
+
         .footer {
             font-weight: 500;
             text-align: center;
@@ -325,6 +450,16 @@
             color: #fff;
             text-decoration: none;
         }
+
+        @media (max-width: 640px) {
+            .name-title {
+                font-size: 2.25rem;
+            }
+
+            .description {
+                font-size: 1.0625rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -342,26 +477,33 @@
                     Bem vindo a BeroLand!
                     <span class="wave-emoji">👋</span>
                 </h1>
+                <div class="description-wrapper" id="descriptionWrapper">
+                    <div class="secret-message">Buuu! 👻</div>
+                    <div class="description-shadow"></div>
+                    <p class="description" id="draggableDescription">
+                        Agregador de links do Bero, engenheiro de software e criador de conteúdo de tecnologia com mais de 300 mil seguidores. Entre em contato para publicidade ou prestação de serviços pelo email <a href="mailto:mail@bero.land" class="email-link">mail@bero.land</a>
+                    </p>
+                </div>
             </div>
 
             <div class="divider"></div>
-            
+
             <div class="section">
                 <h2>
-                    Links Importantes
+                    Aprenda com Bero
                 </h2>
             </div>
 
-            <div class="social-links" id="mainLinks"></div>
+            <div class="social-links" id="learnLinks"></div>
 
             <div class="divider"></div>
-            
+
             <div class="section">
                 <h2>
                     Links Sociais
                 </h2>
             </div>
-            
+
             <div class="social-links" id="socialLinks"></div>
         </div>
 
@@ -371,6 +513,108 @@
     </div>
 
     <script>
+        // Draggable description plate
+        (function() {
+            const description = document.getElementById('draggableDescription');
+            const wrapper = document.getElementById('descriptionWrapper');
+            const shadow = wrapper.querySelector('.description-shadow');
+
+            let isDragging = false;
+            let startX, startY;
+            let offsetX = 0, offsetY = 0;
+            let hasMoved = false;
+
+            function onMouseDown(e) {
+                if (e.target.tagName === 'A') return; // Don't drag when clicking links
+
+                isDragging = true;
+                hasMoved = false;
+                description.classList.add('dragging');
+                wrapper.classList.add('dragging');
+
+                const rect = description.getBoundingClientRect();
+                startX = e.clientX - rect.left;
+                startY = e.clientY - rect.top;
+            }
+
+            function onMouseMove(e) {
+                if (!isDragging) return;
+
+                e.preventDefault();
+                hasMoved = true;
+
+                const rect = wrapper.getBoundingClientRect();
+                offsetX = e.clientX - rect.left - startX;
+                offsetY = e.clientY - rect.top - startY;
+
+                const transform = `translate(${offsetX}px, calc(-4px + ${offsetY}px))`;
+                description.style.transform = transform;
+                shadow.style.transform = transform;
+
+                // Show secret message if dragged far enough
+                const distance = Math.sqrt(offsetX * offsetX + offsetY * offsetY);
+                if (distance > 100) {
+                    wrapper.classList.add('dragged');
+                }
+            }
+
+            function onMouseUp() {
+                if (isDragging) {
+                    isDragging = false;
+                    description.classList.remove('dragging');
+                    wrapper.classList.remove('dragging');
+                }
+            }
+
+            description.addEventListener('mousedown', onMouseDown);
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+
+            // Touch support
+            description.addEventListener('touchstart', (e) => {
+                if (e.target.tagName === 'A') return;
+
+                isDragging = true;
+                hasMoved = false;
+                description.classList.add('dragging');
+                wrapper.classList.add('dragging');
+
+                const touch = e.touches[0];
+                const rect = description.getBoundingClientRect();
+                startX = touch.clientX - rect.left;
+                startY = touch.clientY - rect.top;
+            });
+
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+
+                e.preventDefault();
+                hasMoved = true;
+
+                const touch = e.touches[0];
+                const rect = wrapper.getBoundingClientRect();
+                offsetX = touch.clientX - rect.left - startX;
+                offsetY = touch.clientY - rect.top - startY;
+
+                const transform = `translate(${offsetX}px, calc(-4px + ${offsetY}px))`;
+                description.style.transform = transform;
+                shadow.style.transform = transform;
+
+                const distance = Math.sqrt(offsetX * offsetX + offsetY * offsetY);
+                if (distance > 100) {
+                    wrapper.classList.add('dragged');
+                }
+            }, { passive: false });
+
+            document.addEventListener('touchend', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    description.classList.remove('dragging');
+                    wrapper.classList.remove('dragging');
+                }
+            });
+        })();
+
         // Custom cursor logic
         (function() {
             const cursorEl = document.getElementById('custom-cursor');
@@ -395,6 +639,8 @@
         })();
 
         const socialLinks = [
+         
+        
             {
                 title: 'Twitter',
                 description: 'Perfil para atualizações diárias sobre vídeos e projetos pessoais',
@@ -409,16 +655,15 @@
                 icon: '📷',
                 event: 'instagram_click'
             },
-              {
-                title: 'YouTube => bero',
+            {
+                title: 'YouTube • bero',
                 description: 'Canal com animações e projetos divertidos com programação',
                 url: 'https://www.youtube.com/@meunomeebero',
                 icon: '🎥',
                 event: 'youtube_bero_click'
-
             },
-             {
-                title: 'YouTube => bero o dev',
+            {
+                title: 'YouTube • bero o dev',
                 description: 'Canal com vídeos focados em dicas de carreira, programação e indie hacking',
                 url: 'https://www.youtube.com/@meunomeebero',
                 icon: '🎥',
@@ -432,6 +677,20 @@
                 event: 'github_click'
             },
             {
+                title: 'LinkedIn',
+                description: 'Rede social pessoal de trabalho para receber propostas profissionais',
+                url: 'https://www.linkedin.com/in/robertojrcdc/',
+                icon: '💼',
+                event: 'linkedin_click'
+            },
+            {
+                title: 'Discord • mansão dev',
+                description: 'Comunidade de tecnologia com +6.000 membros',
+                url: 'https://discord.com/servers/mansao-dev-1132161173484224642',
+                icon: '💬',
+                event: 'discord_click'
+            },
+            {
                 title: '+18',
                 description: 'Meu conteúdo secreto',
                 url: '#',
@@ -439,35 +698,31 @@
                 isSecret: true,
                 event: 'secret_click'
             }
-       
         ];
 
-        const mainLinks = [
-            {
-                title: 'MiniLab JavaScript',
-                description: 'Uma hora e meia indo do zero até a construção de um bot do whatsapp integrado com IA por R$37',
-                url: '/minilab',
-                icon: '⚛️',
-                event: 'minilab_javascript_click'
-            },
+        const learnLinks = [
             {
                 title: 'BeroLab',
-                description: 'Laboratório de devs com foco em hackear o mercado',
+                description: 'Plataforma gamificada de comunidade fechada: networking, maratonas, mentorias e conteúdos exclusivos.',
                 url: 'https://berolab.app',
                 icon: '⚗️',
+                price: 'Gratuito',
+                isFree: true,
                 event: 'berolab_click'
             },
             {
-                title: 'Discord => mansão dev',
-                description: 'Comunidade de programadores, artistas e gaymers',
-                url: 'https://discord.com/servers/mansao-dev-1132161173484224642',
-                icon: '💬',
-                event: 'discord_click'
-            },
-        ]
+                title: 'MiniLab JavaScript',
+                description: 'Uma hora e meia indo do zero até a construção de um bot do whatsapp integrado com IA',
+                url: '/minilab',
+                icon: '⚛️',
+                price: 'R$ 37',
+                isFree: false,
+                event: 'minilab_javascript_click'
+            }
+        ];
 
         const socialLinksContainer = document.getElementById('socialLinks');
-        const mainLinksContainer = document.getElementById('mainLinks');
+        const learnLinksContainer = document.getElementById('learnLinks');
 
         function renderCards(container, links) {
             links.forEach(link => {
@@ -515,6 +770,16 @@
                     }, 150);
                 };
 
+                const priceHTML = link.price ? `
+                    <div class="price-badge ${link.isFree ? 'free' : 'paid'}">
+                        ${link.price}
+                    </div>
+                ` : `
+                    <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                `;
+
                 button.innerHTML = `
                     <div class="icon-wrapper">
                         ${link.icon}
@@ -523,9 +788,7 @@
                         <h3 class="link-title">${link.title}</h3>
                         <p class="link-description">${link.description}</p>
                     </div>
-                    <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
+                    ${priceHTML}
                 `;
 
                 wrapper.appendChild(shadow);
@@ -534,8 +797,8 @@
             });
         }
     
-        renderCards(socialLinksContainer, socialLinks);
-        renderCards(mainLinksContainer, mainLinks)
+        renderCards(learnLinksContainer, learnLinks);
+        renderCards(socialLinksContainer, socialLinks)
     </script>
     <script src="./blackboard.js"></script>
 </body>
