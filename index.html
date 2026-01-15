@@ -167,283 +167,153 @@
             position: relative;
         }
 
-        .avatar-container:after {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #37464F;
-            border-radius: 50%;
-            z-index: -1;
-        }
-
         .avatar-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .name-section {
-            text-align: center;
-        }
-
-        .name-title {
-            font-size: 2.75rem;
+        .username {
+            font-size: 1.75rem;
             font-weight: 700;
             color: white;
-            letter-spacing: 0.01em;
             margin-bottom: 1rem;
-        }
-
-        .description-wrapper {
-            position: relative;
-            margin-bottom: 1.5rem;
-            width: 540px;
-            max-width: calc(100vw - 2rem);
-        }
-
-        .secret-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #50fa7b;
             text-align: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 1;
         }
 
-        .description-wrapper.dragged .secret-message {
-            opacity: 1;
-        }
-
-        .description-shadow {
-            position: absolute;
-            top: 3px;
-            left: 0;
-            right: 0;
-            height: calc(100% - 3px);
-            background: #37464F;
-            border-radius: 1rem;
-            transform: translateY(-4px);
-            transition: opacity 150ms ease-out;
-            z-index: 1;
-        }
-
-        .description-wrapper.dragging .description-shadow {
-            opacity: 0.5;
-        }
-
-        .description {
-            font-size: 1.125rem;
-            font-weight: 500;
-            color: #fff;
-            text-align: center;
-            line-height: 1.7;
+        .social-icons-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.75rem;
+            margin-bottom: 2.5rem;
             width: 100%;
-            background: #191919;
-            padding: 2rem;
-            border-radius: 1rem;
-            border: 2px solid #37464F;
-            position: relative;
-            z-index: 2;
-            cursor: grab;
-            user-select: none;
-            transform: translateY(-4px);
-            transition: opacity 0.3s ease;
+            max-width: 240px; /* Forces wrap after 4 icons (32px each + gaps) */
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .description:active {
-            cursor: grabbing;
+        @media (max-width: 480px) {
+            .social-icons-row {
+                max-width: 220px; 
+                gap: 1.5rem;
+            }
         }
 
-        .description.dragging {
-            cursor: grabbing;
-            opacity: 0.9;
+        .social-icon {
+            color: white;
+            transition: transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px; /* reduced by 10% */
+            height: 32px;
         }
 
-        .email-link {
-            color: #37464F;
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.2s ease;
+        .social-icon svg {
+            width: 100%;
+            height: 100%;
         }
 
-        .email-link:hover {
-            opacity: 0.8;
-        }
-
-        .wave-emoji {
-            display: inline-block;
-            margin-left: 0.5rem;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(-20%); }
-            50% { transform: translateY(20%); }
+        .social-icon:hover {
+            transform: scale(1.15);
         }
 
         .social-links {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 0;
+            gap: 1.25rem;
+            margin-bottom: 1rem;
         }
 
         .link-wrapper {
             width: 100%;
             position: relative;
-            margin-bottom: 1rem;
-        }
-
-        .link-shadow {
-            position: absolute;
-            top: 3px;
-            left: 0;
-            right: 0;
-            height: calc(100% - 3px);
-            background: #37464F;
-            border-radius: 1rem;
-            transition:  150ms ease-out;
         }
 
         .link-card {
             width: 100%;
-            border-radius: 1rem;
-            padding: 1.5rem;
+            border-radius: 1.25rem;
+            padding: 1rem 1.25rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.25rem;
             transition: all 150ms ease-out;
             border: 2px solid #37464F;
             position: relative;
             background: #191919;
-            transform: translateY(-4px);
+            box-shadow: 0 5px 0 #37464F;
+            transform: translateY(-5px);
             z-index: 1;
-        }
-
-        .link-wrapper:hover .link-shadow {
-            top: 2px;
+            text-align: left;
         }
 
         .link-wrapper:hover .link-card {
-            transform: translateY(-8px);
+            transform: translateY(-7px);
+            box-shadow: 0 7px 0 #37464F;
+            background: #1c1c1c;
         }
 
         .link-wrapper:active .link-card {
-            transform: scale(0.98);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 0 #37464F;
         }
 
-        .link-wrapper:active .link-shadow {
-            transform: scale(0.98);
-        }
-
-        .link-wrapper.pressed .link-card {
-            transform: translateY(3px);
-        }
-
-        .link-wrapper.pressed .link-shadow {
-            top: 0;
-        }
-
-        .icon-wrapper {
+        .banner-img-container {
+            width: 56px;
+            height: 56px;
+            border-radius: 1rem;
+            overflow: hidden;
             flex-shrink: 0;
-            width: 48px;
-            height: 48px;
-            font-size: 1.875rem;
+            background: #2d374833;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+        }
+
+        .banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-icon {
+            font-size: 1.5rem;
         }
 
         .link-content {
-            text-align: left;
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
         }
 
         .link-title {
-            font-weight: 500;
+            font-weight: 700;
             color: #fff;
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.005em;
+            font-size: 1.125rem;
         }
 
         .link-description {
-            color: #fff;
-            font-size: 1rem;
+            color: #a0aec0;
+            font-size: 0.875rem;
         }
 
         .arrow-icon {
             flex-shrink: 0;
-            width: 20px;
-            height: 20px;
-            color: #4B4B4B;
-        }
-
-        .price-badge {
-            flex-shrink: 0;
-            position: relative;
-            padding: 0.625rem 1rem;
-            font-weight: 700;
-            font-size: 0.875rem;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-            border-radius: 0.75rem;
-            background: #191919;
+            width: 16px;
+            height: 16px;
             color: #fff;
-            border: 2px solid #37464F;
-            box-shadow: 0 4px 0 #37464F;
-            transform: translateY(-3px);
-            transition: all 150ms ease;
-        }
-
-        .link-wrapper:hover .price-badge {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 0 #37464F;
-        }
-
-        .link-wrapper:active .price-badge {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 0 #37464F;
-        }
-
-        .price-badge.free::before {
-            content: '★';
-            margin-right: 0.25rem;
-            font-size: 1rem;
         }
 
         .footer {
             font-weight: 500;
             text-align: center;
             margin-top: 3rem;
-            color: #fff;
-            font-size: 1rem 0 0 0;
-        }
-
-        .divider {
-            background: #37464F;
-            height: 2px;
-            width: 100%;
-            margin: 1.5rem 0 1rem 0;
-        }
-
-        .section {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            width: 100%;
-            color: #37464F;
-            margin: 0 0 2rem 0;
+            margin-bottom: 4rem;
+            color: #4a5568;
+            font-size: 0.875rem;
         }
 
         a {
@@ -452,12 +322,8 @@
         }
 
         @media (max-width: 640px) {
-            .name-title {
-                font-size: 2.25rem;
-            }
-
-            .description {
-                font-size: 1.0625rem;
+            .username {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -472,39 +338,12 @@
                 </div>
             </div>
 
-            <div class="name-section">
-                <h1 class="name-title">
-                    Bem vindo a BeroLand!
-                    <span class="wave-emoji">👋</span>
-                </h1>
-                <div class="description-wrapper" id="descriptionWrapper">
-                    <div class="secret-message">Buuu! 👻</div>
-                    <div class="description-shadow"></div>
-                    <p class="description" id="draggableDescription">
-                        Agregador de links do Bero, engenheiro de software e criador de conteúdo de tecnologia com mais de 300 mil seguidores. Entre em contato para publicidade ou prestação de serviços pelo email <a href="mailto:mail@bero.land" class="email-link">mail@bero.land</a>
-                    </p>
-                </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="section">
-                <h2>
-                    Aprenda com Bero
-                </h2>
-            </div>
+            <div class="username">Bero</div>
+            
+            <div class="social-icons-row" id="socialIconsRow"></div>
 
             <div class="social-links" id="learnLinks"></div>
-
-            <div class="divider"></div>
-
-            <div class="section">
-                <h2>
-                    Links Sociais
-                </h2>
-            </div>
-
-            <div class="social-links" id="socialLinks"></div>
+        </div>
         </div>
 
         <div class="footer">
@@ -513,108 +352,6 @@
     </div>
 
     <script>
-        // Draggable description plate
-        (function() {
-            const description = document.getElementById('draggableDescription');
-            const wrapper = document.getElementById('descriptionWrapper');
-            const shadow = wrapper.querySelector('.description-shadow');
-
-            let isDragging = false;
-            let startX, startY;
-            let offsetX = 0, offsetY = 0;
-            let hasMoved = false;
-
-            function onMouseDown(e) {
-                if (e.target.tagName === 'A') return; // Don't drag when clicking links
-
-                isDragging = true;
-                hasMoved = false;
-                description.classList.add('dragging');
-                wrapper.classList.add('dragging');
-
-                const rect = description.getBoundingClientRect();
-                startX = e.clientX - rect.left;
-                startY = e.clientY - rect.top;
-            }
-
-            function onMouseMove(e) {
-                if (!isDragging) return;
-
-                e.preventDefault();
-                hasMoved = true;
-
-                const rect = wrapper.getBoundingClientRect();
-                offsetX = e.clientX - rect.left - startX;
-                offsetY = e.clientY - rect.top - startY;
-
-                const transform = `translate(${offsetX}px, calc(-4px + ${offsetY}px))`;
-                description.style.transform = transform;
-                shadow.style.transform = transform;
-
-                // Show secret message if dragged far enough
-                const distance = Math.sqrt(offsetX * offsetX + offsetY * offsetY);
-                if (distance > 100) {
-                    wrapper.classList.add('dragged');
-                }
-            }
-
-            function onMouseUp() {
-                if (isDragging) {
-                    isDragging = false;
-                    description.classList.remove('dragging');
-                    wrapper.classList.remove('dragging');
-                }
-            }
-
-            description.addEventListener('mousedown', onMouseDown);
-            document.addEventListener('mousemove', onMouseMove);
-            document.addEventListener('mouseup', onMouseUp);
-
-            // Touch support
-            description.addEventListener('touchstart', (e) => {
-                if (e.target.tagName === 'A') return;
-
-                isDragging = true;
-                hasMoved = false;
-                description.classList.add('dragging');
-                wrapper.classList.add('dragging');
-
-                const touch = e.touches[0];
-                const rect = description.getBoundingClientRect();
-                startX = touch.clientX - rect.left;
-                startY = touch.clientY - rect.top;
-            });
-
-            document.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-
-                e.preventDefault();
-                hasMoved = true;
-
-                const touch = e.touches[0];
-                const rect = wrapper.getBoundingClientRect();
-                offsetX = touch.clientX - rect.left - startX;
-                offsetY = touch.clientY - rect.top - startY;
-
-                const transform = `translate(${offsetX}px, calc(-4px + ${offsetY}px))`;
-                description.style.transform = transform;
-                shadow.style.transform = transform;
-
-                const distance = Math.sqrt(offsetX * offsetX + offsetY * offsetY);
-                if (distance > 100) {
-                    wrapper.classList.add('dragged');
-                }
-            }, { passive: false });
-
-            document.addEventListener('touchend', () => {
-                if (isDragging) {
-                    isDragging = false;
-                    description.classList.remove('dragging');
-                    wrapper.classList.remove('dragging');
-                }
-            });
-        })();
-
         // Custom cursor logic
         (function() {
             const cursorEl = document.getElementById('custom-cursor');
@@ -639,56 +376,78 @@
         })();
 
         const socialLinks = [
-         
-        
             {
                 title: 'Twitter',
                 description: 'Perfil para atualizações diárias sobre vídeos e projetos pessoais',
                 url: 'https://x.com/meunomeebero',
-                icon: '🐦',
+                icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>',
                 event: 'x_click'
             },
             {
                 title: 'Instagram',
                 description: 'Perfil que uso com menos frequência, para stories, animações e posts',
                 url: 'https://www.instagram.com/meunomeebero',
-                icon: '📷',
+                icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.013 3.584-.07 4.85c-.054 1.17-.248 1.805-.413 2.227-.217.562-.477.96-.896 1.382-.42.419-.819.679-1.381.896-.422.164-1.057.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.584-.013-4.85-.07c-1.17-.054-1.805-.248-2.227-.413-.562-.217-.96-.477-1.382-.896-.419-.42-.679-.819-.896-1.381-.164-.422-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.054-1.17.249-1.805.415-2.227.217-.562.477-.96.896-1.382.42-.419.819-.679 1.381-.896.422-.164 1.057-.36 2.227-.413 1.266-.057 1.646-.07 4.85-.07zM12 0C8.741 0 8.333.014 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.741 0 12s.014 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126s1.355 1.078 2.144 1.384c.766.296 1.636.499 2.913.558C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384s1.078-1.354 1.384-2.144c.296-.765.499-1.636.558-2.913.058-1.28.072-1.687.072-4.947s-.014-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126s-1.354-1.078-2.144-1.384c-.765-.296-1.636-.499-2.913-.558C15.667.012 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg>',
                 event: 'instagram_click'
             },
             {
                 title: 'YouTube • bero',
                 description: 'Canal com animações e projetos divertidos com programação',
                 url: 'https://www.youtube.com/@meunomeebero',
-                icon: '🎥',
+                icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>',
                 event: 'youtube_bero_click'
-            },
-            {
-                title: 'YouTube • bero o dev',
-                description: 'Canal com vídeos focados em dicas de carreira, programação e indie hacking',
-                url: 'https://www.youtube.com/@meunomeebero',
-                icon: '🎥',
-                event: 'youtube_bero_o_dev_click'
             },
             {
                 title: 'GitHub',
                 description: 'Perfil dedicado aos meus projetos públicos',
                 url: 'https://github.com/meunomeebero',
-                icon: '🐙',
+                icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>',
                 event: 'github_click'
             },
             {
                 title: 'LinkedIn',
                 description: 'Rede social pessoal de trabalho para receber propostas profissionais',
                 url: 'https://www.linkedin.com/in/robertojrcdc/',
-                icon: '💼',
+                icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg>',
                 event: 'linkedin_click'
             },
             {
                 title: 'Discord • mansão dev',
                 description: 'Comunidade de tecnologia com +6.000 membros',
-                url: 'https://discord.com/servers/mansao-dev-1132161173484224642',
-                icon: '💬',
+                url: 'https://discord.gg/mansaodev',
+                icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.069.069 0 0 0-.032.027C.533 9.048-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg>',
                 event: 'discord_click'
+            },
+            {
+                title: 'TikTok',
+                description: 'Perfil com vídeos curtos de tecnologia e lifestyle',
+                url: 'https://www.tiktok.com/@meunomeebero',
+                icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-4.17.07-8.33.07-12.5z"></path></svg>',
+                event: 'tiktok_click'
+            },
+            {
+                title: 'YouTube • @beroodev',
+                description: 'Canal com vídeos focados em dicas de carreira, programação e indie hacking',
+                url: 'https://www.youtube.com/@meunomeebero',
+                icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>',
+                event: 'youtube_bero_o_dev_click'
+            }
+        ];
+
+        const learnLinks = [
+            {
+                title: 'BeroLab',
+                description: 'Plataforma gamificada de comunidade fechada: networking, maratonas, mentorias e conteúdos exclusivos.',
+                url: 'https://berolab.app',
+                icon: '⚗️',
+                event: 'berolab_click'
+            },
+            {
+                title: 'MiniLab JavaScript',
+                description: 'Uma hora e meia indo do zero até a construção de um bot do whatsapp integrado com IA',
+                url: '/minilab',
+                icon: '⚛️',
+                event: 'minilab_javascript_click'
             },
             {
                 title: '+18',
@@ -700,105 +459,79 @@
             }
         ];
 
-        const learnLinks = [
-            {
-                title: 'BeroLab',
-                description: 'Plataforma gamificada de comunidade fechada: networking, maratonas, mentorias e conteúdos exclusivos.',
-                url: 'https://berolab.app',
-                icon: '⚗️',
-                price: 'Gratuito',
-                isFree: true,
-                event: 'berolab_click'
-            },
-            {
-                title: 'MiniLab JavaScript',
-                description: 'Uma hora e meia indo do zero até a construção de um bot do whatsapp integrado com IA',
-                url: '/minilab',
-                icon: '⚛️',
-                price: 'R$ 37',
-                isFree: false,
-                event: 'minilab_javascript_click'
-            }
-        ];
-
-        const socialLinksContainer = document.getElementById('socialLinks');
+        const socialIconsRow = document.getElementById('socialIconsRow');
         const learnLinksContainer = document.getElementById('learnLinks');
 
-        function renderCards(container, links) {
+        function renderSocialIcons() {
+            socialLinks.forEach(link => {
+                const a = document.createElement('a');
+                a.href = link.url;
+                a.className = 'social-icon';
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+                a.innerHTML = link.icon;
+                a.title = link.title;
+                a.onclick = function(e) {
+                    if (window.datafast) {
+                        try {
+                            window.datafast(link.event);
+                        } catch (error) {
+                            console.warn('Tracking error:', error);
+                        }
+                    }
+                };
+                socialIconsRow.appendChild(a);
+            });
+        }
+
+        function renderBanners(container, links) {
             links.forEach(link => {
                 const wrapper = document.createElement('div');
                 wrapper.className = 'link-wrapper';
-                
-                const shadow = document.createElement('div');
-                shadow.className = 'link-shadow';
                 
                 const button = document.createElement('button');
                 button.className = 'link-card';
                 button.onclick = function(e) {
                     e.preventDefault();
-                    e.stopPropagation();
                     
                     if (window.datafast) {
                         try {
-                            Promise.resolve().then(() => window.datafast(link.event));
+                            window.datafast(link.event);
                         } catch (error) {
-                            console.warn('Erro no tracking:', error);
+                            console.warn('Tracking error:', error);
                         }
                     }
 
                     if (link.isSecret) {
-                        wrapper.classList.add('pressed');
-                        setTimeout(() => {
-                            wrapper.classList.remove('pressed');
-                            const script = document.createElement('script');
-                            script.src = './chaos-mode.js';
-                            document.body.appendChild(script);
-                        }, 150);
+                        const script = document.createElement('script');
+                        script.src = './chaos-mode.js';
+                        document.body.appendChild(script);
                         return;
                     }
 
-                    wrapper.classList.add('pressed');
-
-                    const newWindow = window.open(link.url, '_blank');
-                    
-                    if (!newWindow) {
-                        window.location.href = link.url;
-                    }
-                    
-                    setTimeout(() => {
-                        wrapper.classList.remove('pressed');
-                    }, 150);
+                    window.open(link.url, '_blank');
                 };
 
-                const priceHTML = link.price ? `
-                    <div class="price-badge ${link.isFree ? 'free' : 'paid'}">
-                        ${link.price}
-                    </div>
-                ` : `
-                    <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                `;
-
                 button.innerHTML = `
-                    <div class="icon-wrapper">
-                        ${link.icon}
+                    <div class="banner-img-container">
+                        <span class="banner-icon">${link.icon}</span>
                     </div>
                     <div class="link-content">
                         <h3 class="link-title">${link.title}</h3>
                         <p class="link-description">${link.description}</p>
                     </div>
-                    ${priceHTML}
+                    <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
                 `;
 
-                wrapper.appendChild(shadow);
                 wrapper.appendChild(button);
                 container.appendChild(wrapper);
             });
         }
     
-        renderCards(learnLinksContainer, learnLinks);
-        renderCards(socialLinksContainer, socialLinks)
+        renderSocialIcons();
+        renderBanners(learnLinksContainer, learnLinks);
     </script>
     <script src="./blackboard.js"></script>
 </body>
