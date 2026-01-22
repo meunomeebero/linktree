@@ -173,14 +173,15 @@
 
         .model-container {
             width: 280px;
-            height: 280px;
+            height: 320px;
             position: relative;
             overflow: hidden;
         }
 
         model-viewer {
             width: 100%;
-            height: 200%;
+            height: 600px;
+            margin-left: 8px;
             --poster-color: transparent;
         }
 
@@ -198,8 +199,9 @@
             font-size: 1.75rem;
             font-weight: 700;
             color: white;
-            margin-bottom: 1rem;
+            margin-bottom: 36px;
             text-align: center;
+            padding: 0;
         }
 
         .social-icons-row {
@@ -212,6 +214,7 @@
             max-width: 240px; /* Forces wrap after 4 icons (32px each + gaps) */
             margin-left: auto;
             margin-right: auto;
+            padding: 18px 0;
         }
 
         @media (max-width: 480px) {
@@ -379,10 +382,10 @@
             </div>
 
             <div class="username">Bero</div>
-            
-            <div class="social-icons-row" id="socialIconsRow"></div>
 
             <div class="social-links" id="learnLinks"></div>
+            
+            <div class="social-icons-row" id="socialIconsRow"></div>
         </div>
         </div>
 
@@ -468,7 +471,7 @@
             {
                 title: 'YouTube • @beroodev',
                 description: 'Canal com vídeos focados em dicas de carreira, programação e indie hacking',
-                url: 'https://www.youtube.com/@meunomeebero',
+                url: 'https://www.youtube.com/@beroodev',
                 icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>',
                 event: 'youtube_bero_o_dev_click'
             }
