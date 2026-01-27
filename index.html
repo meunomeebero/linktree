@@ -22,15 +22,20 @@
     <meta name="twitter:title" content="BeroLand - Links do Bero">
     <meta name="twitter:description" content="Se você gosta de programação, criação de apps, SaaS, inteligência artificial, jogos, animação, arte e comunidades do discord, você tá no lugar certo! Bem vindo a BeroLand, o seu centralizados de todos os links do Bero.">
     <meta name="twitter:image" content="public/banner.png">
+    <!-- Google Fonts - Outfit (Fireship font) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Cubano Font for titles -->
+    <link href="https://fonts.cdnfonts.com/css/cubano" rel="stylesheet">
+    
     <!-- Preload local DINRoundPro font files -->
     <link rel="preload" href="public/fonts/dinroundpro_light.otf" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="public/fonts/dinroundpro.otf" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="public/fonts/dinroundpro_medi.otf" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="public/fonts/dinroundpro_bold.otf" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="public/fonts/dinroundpro_black.otf" as="font" type="font/otf" crossorigin>
-
-    <!-- Model Viewer for 3D -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 
     <!-- Analytics -->
     <script
@@ -40,11 +45,38 @@
         src="https://datafa.st/js/script.js">
     </script>
     <style>
-        html {
-            font-family: 'DINRoundPro', system-ui, -apple-system, sans-serif;
+        :root {
+            --font-title: 'Cubano', sans-serif;
+            --bg-primary: #191919;
+            --bg-secondary: #1c1c1c;
+            --text-primary: #F9F4DA;
+            --text-secondary: rgba(249, 244, 218, 0.6);
+            --text-accent: #ff9100;
+            --border-color: #2a2a2a;
+            --icon-bg: #2a2a2a;
+            --icon-bg-hover: #3a3a3a;
         }
 
-        html, body, a, a *, button, button *, .link-card, .link-card *, model-viewer {
+        [data-theme="light"] {
+            --bg-primary: #F9F4DA;
+            --bg-secondary: #f0ead0;
+            --text-primary: #1a1a1a;
+            --text-secondary: rgba(26, 26, 26, 0.6);
+            --text-accent: #ff6f00;
+            --border-color: #fffef5;
+            --icon-bg: #fffef5;
+            --icon-bg-hover: #ffffff;
+        }
+
+        html {
+            font-family: Outfit, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100%;
+        }
+
+        html, body, a, a *, button, button *, .link-card, .link-card * {
             cursor: none !important;
         }
 
@@ -66,6 +98,38 @@
         .is-pointer #custom-cursor {
             background-image: url('public/pointer.png');
         }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.25rem;
+            z-index: 100;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            color: var(--text-accent);
+        }
+
+        .sun-icon { display: none; }
+        .moon-icon { display: block; }
+
+        [data-theme="light"] .sun-icon { display: block; }
+        [data-theme="light"] .moon-icon { display: none; }
 
         @font-face {
             font-family: 'DINRoundPro';
@@ -127,16 +191,14 @@
         body {
             font-family: inherit;
             min-height: 100vh;
-            background-color: #191919;
+            background-color: var(--bg-primary);
             position: relative;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
             font-kerning: normal;
             font-variant-ligatures: common-ligatures contextual;
             font-feature-settings: "kern" 1, "liga" 1, "clig" 1, "calt" 1;
             font-synthesis: none;
+            transition: background-color 0.3s ease;
         }
 
         input, button, textarea, select {
@@ -146,9 +208,22 @@
         .container {
             position: relative;
             z-index: 10;
-            max-width: 580px;
+            max-width: 612px;
             margin: 0 auto;
-            padding: 2rem 1rem;
+            padding: 2rem 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 648px;
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 720px;
+            }
         }
 
         .content-wrapper {
@@ -159,7 +234,7 @@
 
         .avatar-section {
             position: relative;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .avatar-container {
@@ -168,25 +243,6 @@
             border-radius: 50%;
             overflow: hidden;
             position: relative;
-            display: none; /* Hidden when 3D model is available */
-        }
-
-        .model-container {
-            width: 280px;
-            height: 320px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        model-viewer {
-            width: 100%;
-            height: 600px;
-            margin-left: 8px;
-            --poster-color: transparent;
-        }
-
-        model-viewer::part(default-progress-bar) {
-            display: none;
         }
 
         .avatar-img {
@@ -196,12 +252,15 @@
         }
 
         .username {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 36px;
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
             text-align: center;
-            padding: 0;
+            letter-spacing: 0.01em;
+            line-height: 1.1;
+            transition: color 0.3s ease;
         }
 
         .social-icons-row {
@@ -214,7 +273,6 @@
             max-width: 240px; /* Forces wrap after 4 icons (32px each + gaps) */
             margin-left: auto;
             margin-right: auto;
-            padding: 18px 0;
         }
 
         @media (max-width: 480px) {
@@ -225,12 +283,12 @@
         }
 
         .social-icon {
-            color: white;
-            transition: transform 0.2s ease;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 32px; /* reduced by 10% */
+            width: 32px;
             height: 32px;
         }
 
@@ -240,7 +298,8 @@
         }
 
         .social-icon:hover {
-            transform: scale(1.15);
+            transform: scale(1.2) translateY(-2px);
+            color: var(--text-accent);
         }
 
         .social-links {
@@ -258,42 +317,54 @@
 
         .link-card {
             width: 100%;
-            border-radius: 0.875rem;
+            border-radius: 1.25rem;
             padding: 1.25rem 1.5rem;
             display: flex;
             align-items: center;
             gap: 1.25rem;
             transition: all 150ms ease-out;
-            border: 3px solid #37464F;
+            border: 3px solid var(--border-color);
             position: relative;
-            background: #191919;
-            box-shadow: 0 5px 0 #37464F;
+            background: var(--bg-primary);
+            box-shadow: 0 5px 0 var(--border-color);
             transform: translateY(-5px);
             z-index: 1;
             text-align: left;
         }
 
+        @media (min-width: 768px) {
+            .link-card {
+                padding: 1.5rem 1.75rem;
+                gap: 1.5rem;
+            }
+        }
+
         .link-wrapper:hover .link-card {
             transform: translateY(-7px);
-            box-shadow: 0 7px 0 #37464F;
-            background: #1c1c1c;
+            box-shadow: 0 7px 0 var(--border-color);
+            background: var(--bg-secondary);
         }
 
         .link-wrapper:active .link-card {
             transform: translateY(-2px);
-            box-shadow: 0 2px 0 #37464F;
+            box-shadow: 0 2px 0 var(--border-color);
         }
 
         .banner-img-container {
             width: 56px;
             height: 56px;
-            border-radius: 0.75rem;
+            border-radius: 1rem;
             overflow: hidden;
             flex-shrink: 0;
-            background: #2d374833;
+            background: var(--icon-bg);
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .link-wrapper:hover .banner-img-container {
+            background: var(--icon-bg-hover);
         }
 
         .banner-img {
@@ -314,21 +385,47 @@
         }
 
         .link-title {
-            font-weight: 700;
-            color: #fff;
-            font-size: 1.125rem;
+            font-family: var(--font-title);
+            font-weight: 400;
+            color: var(--text-primary);
+            font-size: 1.15rem;
+            letter-spacing: 0.01em;
+            line-height: 1.2;
+            transition: color 0.3s ease;
+        }
+
+        .link-wrapper:hover .link-title {
+            color: var(--text-accent);
         }
 
         .link-description {
-            color: #fff;
-            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            transition: color 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .link-title {
+                font-size: 1.3rem;
+            }
+            
+            .link-description {
+                font-size: 1.05rem;
+            }
         }
 
         .arrow-icon {
             flex-shrink: 0;
             width: 16px;
             height: 16px;
-            color: #fff;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .link-wrapper:hover .arrow-icon {
+            color: var(--text-accent);
+            transform: translateX(4px);
         }
 
         .footer {
@@ -336,56 +433,97 @@
             text-align: center;
             margin-top: 3rem;
             margin-bottom: 4rem;
-            color: #4a5568;
+            color: var(--text-secondary);
             font-size: 0.875rem;
+            transition: color 0.3s ease;
         }
 
         a {
-            color: #fff;
+            color: var(--text-primary);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         @media (max-width: 640px) {
             .username {
-                font-size: 1.5rem;
+                font-size: 2rem;
+            }
+            
+            .link-title {
+                font-size: 1.1rem;
+            }
+            
+            .link-description {
+                font-size: 0.9rem;
+            }
+            
+            .banner-img-container {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .banner-icon {
+                font-size: 1.35rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .username {
+                font-size: 3rem;
+            }
+            
+            .banner-img-container {
+                width: 64px;
+                height: 64px;
+            }
+            
+            .banner-icon {
+                font-size: 1.75rem;
+            }
+            
+            .social-icon {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .social-icons-row {
+                gap: 2rem;
+                max-width: 280px;
             }
         }
     </style>
 </head>
 <body>
     <div id="custom-cursor"></div>
+    <button class="theme-toggle" id="themeToggle" title="Alternar tema">
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+    </button>
     <div class="container">
         <div class="content-wrapper">
             <div class="avatar-section">
-                <div class="model-container">
-                    <model-viewer 
-                        src="public/bero-dancing.glb" 
-                        alt="Bero 3D Avatar"
-                        autoplay
-                        loop
-                        camera-controls
-                        disable-zoom
-                        interaction-prompt="none"
-                        camera-orbit="0deg 75deg 4m"
-                        field-of-view="30deg"
-                        min-camera-orbit="auto auto auto"
-                        max-camera-orbit="auto auto auto"
-                        environment-image="neutral"
-                        shadow-intensity="0"
-                        exposure="1.2"
-                    ></model-viewer>
-                </div>
-                <!-- Fallback for when 3D doesn't load -->
                 <div class="avatar-container">
                     <img src="public/fly.gif" alt="Bero Avatar" class="avatar-img">
                 </div>
             </div>
 
             <div class="username">Bero</div>
-
-            <div class="social-links" id="learnLinks"></div>
             
             <div class="social-icons-row" id="socialIconsRow"></div>
+
+            <div class="social-links" id="learnLinks"></div>
         </div>
         </div>
 
@@ -398,7 +536,7 @@
         // Custom cursor logic
         (function() {
             const cursorEl = document.getElementById('custom-cursor');
-            const pointerSelectors = 'a, button, .link-card, model-viewer';
+            const pointerSelectors = 'a, button, .link-card';
 
             function onMouseMove(ev) {
                 const x = ev.clientX;
@@ -457,7 +595,7 @@
             {
                 title: 'Discord • mansão dev',
                 description: 'Comunidade de tecnologia com +6.000 membros',
-                url: 'https://discord.gg/mansaodev',
+                url: 'https://discord.com/servers/mansao-dev-1132161173484224642',
                 icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.069.069 0 0 0-.032.027C.533 9.048-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg>',
                 event: 'discord_click'
             },
@@ -491,6 +629,13 @@
                 url: '/minilab',
                 icon: '⚛️',
                 event: 'minilab_javascript_click'
+            },
+            {
+                title: 'Currículo 2026',
+                description: 'Meu currículo otimizado para ATS & IA para aplicações internacionais',
+                url: 'https://gist.github.com/meunomeebero/21a29f49336e0f4256e22e791afd8035',
+                icon: '📄',
+                event: 'resume_click'
             },
             {
                 title: '+18',
@@ -575,6 +720,37 @@
     
         renderSocialIcons();
         renderBanners(learnLinksContainer, learnLinks);
+
+        // Theme toggle functionality
+        (function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            function getStoredTheme() {
+                return localStorage.getItem('theme');
+            }
+            
+            function setTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+            }
+            
+            function toggleTheme() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                setTheme(newTheme);
+            }
+            
+            // Initialize theme
+            const storedTheme = getStoredTheme();
+            if (storedTheme) {
+                setTheme(storedTheme);
+            } else if (!prefersDark.matches) {
+                setTheme('light');
+            }
+            
+            themeToggle.addEventListener('click', toggleTheme);
+        })();
     </script>
     <script src="./blackboard.js"></script>
 </body>
